@@ -1,4 +1,4 @@
-# Version2: Dict -> 
+# Version2: Dict -> O(n)
 
 # A dict() to help solve the problem in one pass
 class Solution(object):
