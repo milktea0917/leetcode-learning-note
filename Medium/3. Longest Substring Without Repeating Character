@@ -1,0 +1,27 @@
+# version 1
+
+# This code is based on the work of Rahul Varma. (https://leetcode.com/rahulvarma5297/)
+# set()
+
+# set() is a good structure to filter unique word, but it is important to know that the element in set() doesn't have orders.
+# Since our final target is to return the final maximum length of the substring, using set() is good enough for us.
+# time complexiity: O(n)
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        n = len(s)
+        maxLength = 0
+        charSet = set()
+        left = 0
+        
+        for right in range(n):
+            if s[right] not in charSet:
+                charSet.add(s[right])
+                maxLength = max(maxLength, right - left + 1)
+            else:
+                while s[right] in charSet: # This is the toughest part because we have to shift the substring to a new appearing character, even though it has been shown before.
+                    charSet.remove(s[left])
+                    left += 1
+                charSet.add(s[right])
+        
+        return maxLength
