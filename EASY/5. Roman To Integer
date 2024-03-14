@@ -1,0 +1,22 @@
+# 1. Create a dictionary to store the relationship between vocabulary and its corresponding values.
+# 2. look from right to left
+# 3. Set a flag for IV, XC, and CM because we can't add them directly.
+# 4. The flag has to be in front in the usual case.
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        
+        roman_dict = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D":500, "M":1000}
+        final_ans = 0
+        attention_flag = False
+        for index in reversed(range(len(s))):
+            if attention_flag:
+                attention_flag = False
+                temp = roman_dict[s[index+1]] -  roman_dict[s[index]] 
+                final_ans += temp
+            elif roman_dict[s[index]] <= roman_dict[s[index-1]] or index==0:
+                final_ans += roman_dict[s[index]]
+            else:
+                attention_flag = True
+
+        return final_ans
