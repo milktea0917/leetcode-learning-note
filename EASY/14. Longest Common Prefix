@@ -1,0 +1,18 @@
+# 1. Set smallest_len to a very large number, which will be replaced anyway.
+# 2. Find the minimal length in strs; it helps us to save more time in the loop.
+# 3. Compare the letters from left to right; if they are not the same, return the current final_ans without adding this time.
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        final_ans = ""
+        smallest_len = 99999999
+        for i in range(len(strs)):
+            if len(strs[i]) < smallest_len:
+                smallest_len = len(strs[i])
+                
+        for i in range(smallest_len):
+            for j in range(len(strs)):
+                if strs[0][i] != strs[j][i]:
+                    return final_ans
+            final_ans = final_ans +  strs[0][i]
+        return final_ans
