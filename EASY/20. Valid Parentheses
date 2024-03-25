@@ -1,0 +1,32 @@
+# version1 
+# Use a dictionary to compare the top of the stack and the current content as a pair or not.
+# If empty: append.
+# If not a pair: append.
+# If it's a pair and in the 'correct order': pop out the history and finish the loop without appending.
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+
+        parentheses_dict = {'(': 1, ')': -1, '{': 2,'}': -2, '[': 3,']': -3, }
+
+        if len(s)%2 ==1:
+            return False
+
+        temp_stack = []
+        for i in range(len(s)):
+            if len(temp_stack) == 0:
+                temp_stack.append(s[i])
+                continue
+
+            history = parentheses_dict[ temp_stack[-1] ]
+            current = parentheses_dict[ s[i] ]
+
+            if ((history + current)!=0) or (history < current) :
+                temp_stack.append(s[i])
+            else:
+                temp_stack.pop()
+
+        if len(temp_stack) == 0:
+            return True
+        else:
+            return False
