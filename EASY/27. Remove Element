@@ -1,0 +1,8 @@
+# We only need to return the length of the removed results.
+# So we just check if val is in the list and keep removing it until val no longer exists.
+
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        while val in nums:
+            nums.remove(val)
+        return len(nums)
