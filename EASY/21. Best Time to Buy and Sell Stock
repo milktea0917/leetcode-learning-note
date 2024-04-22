@@ -1,0 +1,16 @@
+# Because time cannot go back, we compare the profit each time to decide whether we want to sell or not.
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        buy_price = prices[0]
+        profit = 0
+
+        for p in prices[1:]:
+            if buy_price > p:
+
+                # This implies a higher chance of obtaining a greater profit
+                # since we can acquire a lower price in this scenario
+                buy_price = p 
+            
+            profit = max(profit, p - buy_price) 
+        
+        return profit
