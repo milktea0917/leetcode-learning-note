@@ -1,9 +1,24 @@
 # Merge two lists without returning.
 # Since there will be space for nums2's elements in nums1, we only need to replace the values in nums1 with those from nums2 and then sort it."
 
+#### if python ####
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         counter = 0
         for i in range(n):
             nums1[m+i] = nums2[i]
         nums1.sort()
+
+#### if C++ ####
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int j = 0;
+        int i = m;
+        for (j = 0; j<n; j++){
+            nums1[i] = nums2[j];
+            i++;
+        }
+        sort(nums1.begin(), nums1.end());
+    }
+};
