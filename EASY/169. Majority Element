@@ -1,8 +1,19 @@
 # Since the Majority Element has to appear more than ⌊n / 2⌋ times,
 # we can simply sort the array and pick the middle element to get the answer.
 
+#### if python ####
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         nums.sort()
         n = len(nums)
         return nums[n//2]
+
+#### if C++ ####
+// vector -> make good use of vector.begin() and vector.end(), these two are like pointers
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        return nums[nums.size()/2];
+    }
+};
