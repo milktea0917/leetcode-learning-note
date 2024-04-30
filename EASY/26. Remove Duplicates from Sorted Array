@@ -2,6 +2,7 @@
 # If the current number has no duplicates from the past, we can update the target index.
 # This code shows the first 'k' correct elements but does not mean that 'len(nums)' turns into only 'k'.
 
+#### if python ####
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
 
@@ -18,4 +19,15 @@ class Solution:
         # explanation from sumanshekhar698
         # Yon not only have to return the number of unique elements say 'x',
         # In addition to this you have to modify the ORIFGNAL array (nums) at the first x positions with the unique elements.
-        
+
+#### C++ ####
+class Solution {
+public:
+    // vec.erase -> truly delete the element in the container
+    // std::remove -> move the specific value to the end of the container
+    // std::unique -> move the duplicate value to the end of the container
+    int removeDuplicates(vector<int>& nums) {
+        nums.erase(std::unique(nums.begin(), nums.end()), nums.end());
+        return nums.size();
+    }
+};
