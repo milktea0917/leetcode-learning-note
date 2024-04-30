@@ -1,8 +1,24 @@
 # We only need to return the length of the removed results.
 # So we just check if val is in the list and keep removing it until val no longer exists.
 
+#### if python ####
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
         while val in nums:
             nums.remove(val)
         return len(nums)
+
+#### if C++ ####
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {   
+        // ref: https://stackoverflow.com/questions/3385229/c-erase-vector-element-by-value-rather-than-by-position
+        // known as erase-remove idiom
+        // std::remove() -> move specific value to the end of the container, e.g.  list, vector, array
+        // vector.erase( remove(), vector.end()) 
+        // 1. vector.erase -> delete the specific value
+        // 2. vector.end() -> a pointer that points to the end of the container
+        nums.erase(std::remove(nums.begin(), nums.end(), val), nums.end());
+        return nums.size();
+    }
+};
