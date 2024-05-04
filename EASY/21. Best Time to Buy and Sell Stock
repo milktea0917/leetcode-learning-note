@@ -1,4 +1,6 @@
 # Because time cannot go back, we compare the profit each time to decide whether we want to sell or not.
+
+#### if python ####
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         buy_price = prices[0]
@@ -14,3 +16,25 @@ class Solution:
             profit = max(profit, p - buy_price) 
         
         return profit
+
+#### if C++ ####
+# vector.begin(), vector.end(): are pointers which point to the start and the end of the vector
+# vector has dynamic memory
+# vector.size(): show the current size of the vector
+# max(): use to compare two value and return the bigger one
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy_price = prices[0];
+        int max_profit = 0;
+
+        for(int i=1; i<prices.size(); i++){
+            if(buy_price>prices[i]){
+                buy_price = prices[i];
+            }
+
+            max_profit = max(max_profit, prices[i]-buy_price);
+        }
+        return max_profit;
+    }
+};
