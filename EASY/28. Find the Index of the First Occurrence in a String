@@ -1,0 +1,16 @@
+// find(): is a function which is both good at python and c++
+#### if python ####
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        return haystack.find(needle)
+
+#### if C++ ####
+// size_t: used for indexing or representing the size of a variable.
+// string1.find(string2): used for finding if a substring exists within another string; it returns the index where the substring is found or -1 if it's not found.
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        std::size_t found = haystack.find(needle); 
+        return found;
+    }
+};
