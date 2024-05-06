@@ -3,6 +3,7 @@
 # 3. Set a flag for IV, XC, and CM because we can't add them directly.
 # 4. The flag has to be in front in the usual case.
 
+#### if python ####
 class Solution:
     def romanToInt(self, s: str) -> int:
         
@@ -20,3 +21,34 @@ class Solution:
                 attention_flag = True
 
         return final_ans
+
+#### if C++ ####
+// There are two things worth learning:
+// 1. unordered_map: it's like a dictionary in Python, using keys to find values.
+// 2. When something typically progresses from left to right, considering a reverse approach to code design could be important.
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char, int> m;
+        
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
+        
+        int ans = 0;
+        
+        for(int i = 0; i < s.length(); i++){
+            if(m[s[i]] < m[s[i+1]]){
+                ans -= m[s[i]];
+            }
+            else{
+                ans += m[s[i]];
+            }
+        }
+        return ans;
+    }
+};
