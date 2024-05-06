@@ -2,6 +2,7 @@
 # 2. Find the minimal length in strs; it helps us to save more time in the loop.
 # 3. Compare the letters from left to right; if they are not the same, return the current final_ans without adding this time.
 
+#### if python ####
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         final_ans = ""
@@ -16,3 +17,30 @@ class Solution:
                     return final_ans
             final_ans = final_ans +  strs[0][i]
         return final_ans
+
+#### if C++ ####
+// 1. We can initialize the variable with the first element of the vector.
+// 2. In the for loop, we compare A. the min_length of two words B. and let the substring be updated.
+// 3. When the length is 0, just return, because there is no prefix that exists.
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if (strs.empty()) return "";
+
+        string pref = strs[0];
+        int prefLen = pref.length();
+
+        for (int i = 1; i < strs.size(); i++) {
+            string s = strs[i];
+            while (prefLen > s.length() || pref != s.substr(0, prefLen)) {
+                prefLen--;
+                if (prefLen == 0) {
+                    return "";
+                }
+                pref = pref.substr(0, prefLen);
+            }
+        }
+
+        return pref;        
+    }
+};
