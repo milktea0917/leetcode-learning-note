@@ -1,0 +1,29 @@
+#### if Python ####
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        s = s.split()
+        return len(s[-1])
+
+#### if C++ ####
+// Counting from right to left since only the length of the final word is needed.
+// 1. In the for loop, the stopping criterion should be 'i >= 0' instead of 'i > 0' to handle test cases with single letters like 'a'."
+// 2. The 'else if' statement is designed to end the loop when counting is complete.
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        
+        int final_return = 0;
+        bool counting = false;
+
+        for(int i=s.size()-1; i>=0; i--){
+            if(s[i]!=' '){
+                final_return += 1;
+                counting  = true;
+            }
+            else if(counting){
+                break;
+            }
+        }
+        return final_return;
+    }
+};
