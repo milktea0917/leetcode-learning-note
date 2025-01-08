@@ -1,3 +1,49 @@
+# version2： 2025.01.08
+# There is a better version which use replace to solve problems.
+class Solution:
+    def romanToInt(self, s: str) -> int:
+
+        roman_dict = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        for i, content in enumerate(s):
+            if i == 0:
+                final_return = roman_dict[content]
+                continue
+            match content:
+                case "V":
+                    if s[i - 1] == "I":
+                        final_return += 3
+                    else:
+                        final_return += 5
+                case "X":
+                    if s[i - 1] == "I":
+                        final_return += 8
+                    else:
+                        final_return += 10
+                case "L":
+                    if s[i - 1] == "X":
+                        final_return += 30
+                    else:
+                        final_return += 50
+                case "C":
+                    if s[i - 1] == "X":
+                        final_return += 80
+                    else:
+                        final_return += 100
+                case "D":
+                    if s[i - 1] == "C":
+                        final_return += 300
+                    else:
+                        final_return += 500
+                case "M":
+                    if s[i - 1] == "C":
+                        final_return += 800
+                    else:
+                        final_return += 1000
+                case _:
+                    final_return += 1
+        return final_return
+
+# version1
 # 1. Create a dictionary to store the relationship between vocabulary and its corresponding values.
 # 2. look from right to left
 # 3. Set a flag for IV, XC, and CM because we can't add them directly.
