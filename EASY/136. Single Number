@@ -1,0 +1,23 @@
+# brute force version
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        remember_dict = {}
+        for i in nums:
+            if i not in remember_dict:
+                remember_dict[i] = 1
+            else:
+                remember_dict[i] += 1
+        return  list(remember_dict.keys())[list(remember_dict.values()).index(1)]
+
+# xor version
+## if a number occurs even times, will be offset
+## after xoring all the list of int, the odd ones will be remained
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        xor = 0
+        for num in nums:
+            
+            xor ^= num
+            print(f"num: {num}, xor: {xor}")
+
+        return xor
