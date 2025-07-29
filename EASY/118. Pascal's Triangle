@@ -1,0 +1,21 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        final_list = []
+        for i in range(numRows):
+            # do initial when len(final_list)==0 and len(final_list)==1 
+            if len(final_list) == 0 :
+                final_list.append([1])
+            elif len(final_list) == 1:
+                final_list.append([1,1])
+            else: # core step
+                start = 0 
+                end = 1
+                temp_list = [1]
+                target_list = final_list[-1] # front
+                for j in range(len(target_list)-1):
+                    temp_list.append(target_list[start]+target_list[end])
+                    start += 1
+                    end += 1
+                temp_list.append(1) # tail
+                final_list.append(temp_list)
+        return final_list
