@@ -1,0 +1,23 @@
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        
+        final_list = []
+        count = 0
+
+        for index, value in enumerate(nums):
+            if (value+1) not in nums and (count == 0):
+                final_list.append(str(value))
+            else:
+                if (value+1) not in nums:
+
+                    temp_str = str(value-count) + "->" + str(value)
+                    final_list.append(temp_str)
+                    
+                    # reset
+                    temp_str = ""
+                    count = 0
+                    
+                else:
+                    count += 1
+
+        return final_list
