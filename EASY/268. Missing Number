@@ -1,0 +1,18 @@
+# brute force version
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        for i in range(len(nums)+1):
+            if i in nums:
+                continue
+            else:
+                return i
+
+# super smart version
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        
+        v = [-1] * (len(nums)+1)
+        for i in nums:
+            v[i] = i
+        
+        return v.index(-1) 
