@@ -1,0 +1,19 @@
+class Solution:
+    def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
+        
+        final_return = 0 
+        start = timeSeries[0]
+        end = timeSeries[0]
+
+        for i in timeSeries:
+            
+            # if the poison has not been reset
+            if end < i:
+                final_return += end - start
+                start  = i
+            
+            # reset the duration
+            end = i + duration
+             
+        final_return += end - start
+        return final_return
