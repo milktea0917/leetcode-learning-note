@@ -1,0 +1,65 @@
+# brute force version
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+        
+        first_row_dict = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'}
+        second_row_dict = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'}
+        third_row_dict = {'z', 'x', 'c', 'v', 'b', 'n', 'm'}
+        
+        final_list = []
+        for word in words:
+
+            # initial
+            break_flag = False
+            temp_cnt = 0
+            if word[0].lower() in first_row_dict:
+                temp_cnt = 1
+            elif word[0].lower() in second_row_dict:
+                temp_cnt = 2
+            elif word[0].lower() in third_row_dict:
+                temp_cnt = 3
+            else:
+                continue
+
+            # core judgement
+            for index, char in enumerate(list(word.lower())):
+                
+                match temp_cnt:
+                    case 1:
+                        if char not in first_row_dict:
+                            break_flag = True
+                    case 2:
+                        if char not in second_row_dict:
+                            break_flag = True
+                    case 3:
+                        if char not in third_row_dict:
+                            break_flag = True
+                if break_flag:
+                    break
+
+            if break_flag:     
+                break_flag = False   
+                continue
+            else:
+                final_list.append(word)
+                break_flag = False
+
+        return final_list
+
+# smarter version
+class Solution(object):
+    def findWords(self, words):
+        m = {}
+        for c in "qwertyuiop":
+            m[c] = 1
+        for c in "asdfghjkl":
+            m[c] = 2
+        for c in "zxcvbnm":
+            m[c] = 3
+        ans = []
+        for w in words:
+            lw = w.lower()
+            r = m[lw[0]]
+            if all(m[ch] == r for ch in lw):
+                ans.append(w)
+        return ans
