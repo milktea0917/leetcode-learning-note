@@ -1,0 +1,21 @@
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        
+        total = len(mat) * len(mat[0])
+        if (total//r) != c:
+            return mat
+
+        mat_1D_list = []
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                mat_1D_list.append(mat[i][j])
+
+        final_return = [] 
+        count = 0
+        for i in range(r):
+            temp_list = []
+            for j in range(total//r):
+                temp_list.append(mat_1D_list[count])
+                count += 1
+            final_return.append(temp_list)
+        return final_return 
