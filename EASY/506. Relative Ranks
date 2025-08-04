@@ -1,0 +1,36 @@
+# brute force version
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        
+        score_order = [i+1 for i in range(len(score))]
+        score_combine_sort = sorted(zip(score, score_order), reverse = True)
+        score_sort, score_order = zip(*score_combine_sort)
+
+        final_return = []
+        for index, value in enumerate(score):
+            sort_index = score_sort.index(value)
+            match sort_index:
+                case 0:
+                    final_return.append("Gold Medal")
+                case 1:
+                    final_return.append("Silver Medal")
+                case 2:
+                    final_return.append("Bronze Medal")
+                case _:
+                    final_return.append(str(sort_index+1))
+
+        return final_return
+
+# faster version
+class Solution(object):
+    def findRelativeRanks(self, score):
+
+        sorted_scores = sorted(score, reverse=True)
+        ranks = {sorted_scores[i]: str(i + 1) for i in range(len(score))}
+        ranks[sorted_scores[0]] = "Gold Medal"
+        
+        if len(score) > 1:
+            ranks[sorted_scores[1]] = "Silver Medal"
+        if len(score) > 2:
+            ranks[sorted_scores[2]] = "Bronze Medal"
+        return [ranks[s] for s in score]
