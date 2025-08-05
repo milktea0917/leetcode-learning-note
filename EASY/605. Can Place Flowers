@@ -1,0 +1,42 @@
+# brute force version 
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        
+        count = 0
+        if len(flowerbed) == 1:
+            if flowerbed[0] == 0:
+                count += 1
+                return count >= n
+            else: 
+                return count >= n
+        
+        for index, value in enumerate(flowerbed):
+            match value:
+                case 0:
+                    if index == 0 :
+                        if flowerbed[1] ==0:
+                            count += 1
+                            flowerbed[index] = 1
+                    elif index == (len(flowerbed)-1):
+                        if flowerbed[index-1] == 0:
+                            count+= 1
+                    elif sum(flowerbed[index-1:index+2]) == 0:
+                        count += 1
+                        flowerbed[index] = 1
+                case _:
+                    continue                
+            
+        return count >= n
+
+# smarter version
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        if n == 0:
+            return True
+        for i in range(len(flowerbed)):
+            if flowerbed[i] == 0 and (i == 0 or flowerbed[i-1] == 0) and (i == len(flowerbed)-1 or flowerbed[i+1] == 0):
+                flowerbed[i] = 1
+                n -= 1
+                if n == 0:
+                    return True
+        return False
