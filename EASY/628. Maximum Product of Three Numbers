@@ -1,0 +1,36 @@
+# brute force version
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        
+        if len(nums) == 3:
+            return nums[0] * nums[1] * nums[2]
+
+        sort_nums = sorted(nums)
+        final_result = sort_nums[-1]
+        
+        if final_result > 0:
+            if sort_nums[0] * sort_nums[1] > sort_nums[-2] * sort_nums[-3]:
+                return final_result * sort_nums[0] * sort_nums[1]
+            else:
+                return final_result * sort_nums[-2] * sort_nums[-3]
+        elif final_result <= 0:
+            return final_result * sort_nums[-2] * sort_nums[-3]
+
+# clear version 
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        
+        if len(nums) == 3:
+            return nums[0] * nums[1] * nums[2]
+
+        sort_nums = sorted(nums)
+
+        three_max = sort_nums[-1] * sort_nums[-2] * sort_nums[-3]
+        one_max_two_small = sort_nums[-1] * sort_nums[0] * sort_nums[1]
+
+        if three_max > one_max_two_small:
+            return three_max
+        else:
+            return one_max_two_small
+
+
