@@ -1,0 +1,18 @@
+class Solution:
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        initital = nums[0]
+        final_return = 1 # the length of one element list is at least one
+        temp = 1 # temp count of length
+        for index, value in enumerate(nums[1:]):
+            if value > initital:
+                temp += 1 # length + 1
+                initital = value # remember the past
+            else:
+                # if current Subsequence length > past, replace it
+                if temp > final_return:
+                    final_return = temp
+                temp = 1 # reset temp count of length
+                initital = value # remember the past
+        if temp > final_return:
+            final_return = temp
+        return final_return 
