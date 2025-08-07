@@ -1,0 +1,12 @@
+class Solution:
+    def findShortestSubArray(self, A):
+    first, count, res, degree = {}, {}, 0, 0
+    for index, value in enumerate(A):
+        first.setdefault(value, index) # 紀錄value第一次出現的位置
+        count[value] = count.get(value, 0) + 1 # 紀錄value出現的次數
+        if count[value] > degree: # 如果value出現的次數刷新
+            degree = count[value] # 取代最多次數
+            res = index - first[value] + 1 # 取代最多degree之距離
+        elif count[value] == degree: # 如果次數相等
+            res = min(res, index - first[value] + 1) # 找到最小的距離
+    return res
