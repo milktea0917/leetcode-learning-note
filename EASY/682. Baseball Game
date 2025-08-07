@@ -1,0 +1,15 @@
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        # final_score_list: use for recording the score
+        final_score_list = []
+        for index, value in enumerate(operations):
+            match value:
+                case "C":
+                    final_score_list.pop()
+                case "D":
+                    final_score_list.append(2*int(final_score_list[-1]))
+                case "+":
+                    final_score_list.append(int(final_score_list[-1])+int(final_score_list[-2]))
+                case _:
+                    final_score_list.append(int(value))
+        return sum(final_score_list)
