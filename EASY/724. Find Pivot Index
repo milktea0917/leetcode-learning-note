@@ -1,0 +1,18 @@
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        
+        left_sum, right_sum = 0, sum(nums)
+
+        for index, value in enumerate(nums):
+            
+            # we have to minus first, because it is actually index + 1
+            right_sum -= value
+            
+            # if the results match, then we find the pivot
+            if left_sum == right_sum:
+                return index
+            
+            # since index + 1, left_sum has to be calculate
+            left_sum += value
+        
+        return -1
