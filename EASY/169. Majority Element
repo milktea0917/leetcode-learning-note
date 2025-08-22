@@ -1,19 +1,39 @@
-# Since the Majority Element has to appear more than ⌊n / 2⌋ times,
-# we can simply sort the array and pick the middle element to get the answer.
+# Since the majority element appears more than ⌊n / 2⌋ times,
+# sorting the array guarantees that the middle element is the majority element.
 
 #### if python ####
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         nums.sort()
         n = len(nums)
-        return nums[n//2]
+        return nums[n // 2]
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        
+        # Extract unique elements from nums
+        temp = list(set(nums))
+
+        # final_return: stores the majority element found so far
+        # counter: stores the highest occurrence count found so far
+        final_return = 0
+        counter = 0
+        for i in temp:
+            i_count = nums.count(i)
+            # Update if the current element has a higher count
+            if counter < i_count:
+                final_return = i
+                counter = i_count
+
+        return final_return
 
 #### if C++ ####
-// vector -> make good use of vector.begin() and vector.end(), these two are like pointers
+// Use vector.begin() and vector.end() which provide iterators (like pointers)
+// to efficiently sort the vector and access elements.
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        return nums[nums.size()/2];
+        return nums[nums.size() / 2];
     }
 };
