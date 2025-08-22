@@ -1,5 +1,6 @@
 # Merge two lists without returning.
-# Since there will be space for nums2's elements in nums1, we only need to replace the values in nums1 with those from nums2 and then sort it."
+# Since there will be space for nums2's elements in nums1, we only need to replace the values in nums1 with those from nums2 and then sort it.
+# requirements: nums1 has a length of m + n
 
 #### if python ####
 class Solution:
