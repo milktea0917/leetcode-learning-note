@@ -1,31 +1,46 @@
-# Since the first element has no problem with duplicates, we can also set a comparison target index 'j' for the returning value.
-# If the current number has no duplicates from the past, we can update the target index.
-# This code shows the first 'k' correct elements but does not mean that 'len(nums)' turns into only 'k'.
+# Requirements: return k, where k is the number of non-zero elements;
+# the first k elements of nums should be these non-zero elements.
 
-#### if python ####
+#### Python ####
+# A trivial approach:
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
+        temp = sorted(list(set(nums)))
+        for i in range(len(temp)):
+            nums[i] = temp[i]
+        return len(temp)
 
+# Since the first element cannot be a duplicate by definition,
+# we can maintain a target index 'j' to track the position of the next unique element.
+# If the current number is different from the previous one,
+# we place it at index j and increment j.
+# This way, the first 'k' elements in nums are unique,
+# but the length of nums remains unchanged.
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
         j = 1
         for i in range(1, len(nums)):
-            if nums[i] != nums[i-1]:
+            if nums[i] != nums[i - 1]:
                 nums[j] = nums[i]
                 j += 1
         return j
 
-        # solution1: not working one
-        # return len(set(nums))
+# solution1: does not work as it only returns the count of unique elements,
+# but does not modify the original array in place.
+# return len(set(nums))
 
-        # explanation from sumanshekhar698
-        # Yon not only have to return the number of unique elements say 'x',
-        # In addition to this you have to modify the ORIFGNAL array (nums) at the first x positions with the unique elements.
+# Explanation from sumanshekhar698:
+# Not only do you have to return the number of unique elements (say 'x'),
+# but you also need to modify the original array 'nums' such that
+# the first x positions contain these unique elements.
 
 #### C++ ####
 class Solution {
 public:
-    // vec.erase -> truly delete the element in the container
-    // std::remove -> move the specific value to the end of the container
-    // std::unique -> move the duplicate value to the end of the container
+    // vec.erase truly removes elements from the container,
+    // std::remove moves all elements equal to a specific value to the end (does not change container size),
+    // std::unique moves all duplicate consecutive elements to the end,
+    // thus combining erase and unique removes duplicates correctly.
     int removeDuplicates(vector<int>& nums) {
         nums.erase(std::unique(nums.begin(), nums.end()), nums.end());
         return nums.size();
