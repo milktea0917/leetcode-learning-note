@@ -3,6 +3,25 @@
 #### if python ####
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        
+        buy_price = prices[0]
+        profit = 0
+        
+        for i in prices[1:]:
+            
+            # bigger than buy_price, have profit
+            if i > buy_price:
+                current_profit = i-buy_price
+                if current_profit > profit:
+                    profit = current_profit
+            # smaller than buy_price, have a better buy_price
+            else: 
+                buy_price = i
+
+        return profit
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
         buy_price = prices[0]
         profit = 0
 
