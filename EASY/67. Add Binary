@@ -1,0 +1,24 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        # prepare iteration input
+        # "1010" + "1011" --> "2021" --> ["2","0","2","1"]
+        temp = int(a) + int(b)
+        temp = list(str(int(a) + int(b)))
+        # initial
+        final_return = []
+        temp_len = len(temp)
+        carry = 0 
+        # main 
+        for i in range(temp_len):
+            cur_value = int(temp[-i-1])+carry
+            if cur_value >= 2:
+                final_return.insert(0, (cur_value)%2)
+                carry = 1
+            else:
+                carry = 0
+                final_return.insert(0, cur_value)
+        if carry ==1:
+            final_return.insert(0, 1)
+            return "".join(map(str, final_return))
+        else:
+            return "".join(map(str, final_return))
