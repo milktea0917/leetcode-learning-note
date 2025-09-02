@@ -1,0 +1,56 @@
+# ★ Better Solution ★
+# Binary Search 
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        match x:
+            case 0:
+                return 0
+            case 1:
+                return 1
+            case 2:
+                return 1
+            case 3:
+                return 1
+            case _:
+                sqrt_root , distance = x , x
+                left = 1
+                right = x
+                while right > left:
+                    cur_sqrt_root = (left+right)//2
+                    cur_x = cur_sqrt_root * cur_sqrt_root
+                    cur_distance = x - cur_x
+                    print(f"cur_sqrt_root: {cur_sqrt_root}, cur_x: {cur_x}, cur_distance: {cur_distance}")
+                    if cur_x == x:
+                        return cur_sqrt_root
+                    elif cur_x > x: # cur_x bigger than correct square_root
+                        right = cur_sqrt_root
+                    else: # cur_x smaller than correct square_root
+                        if cur_distance < distance:
+                            distance = cur_distance
+                            left = cur_sqrt_root
+                            sqrt_root = cur_sqrt_root
+                        else:
+                            return sqrt_root
+
+# Brute Force Version
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        match x:
+            case 0:
+                return 0
+            case 1:
+                return 1
+            case 2:
+                return 1
+            case 3:
+                return 1
+            case _:
+                sqrt_root, distance = x, x
+                for i in range(1,x):
+                    quotient = float(x) / i
+                    cur_distance = quotient-i
+                    if cur_distance < distance and cur_distance >= 0:
+                        sqrt_root = i
+                        distance = cur_distance
+                    else:
+                        return sqrt_root
