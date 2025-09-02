@@ -1,0 +1,25 @@
+# Brute Force Version
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        
+        # initial
+        s = list(s)
+        counter_s = Counter(s)
+
+        # main
+        # find all the even count 
+        # flag: knowing if odd occurs
+        final_return = 0
+        odd_count = 0
+        odd_flag = False
+        for value in counter_s.values():
+            temp = value % 2
+            if temp == 0: # if count result is even 
+                final_return += value
+            else: # if count result is odd
+                odd_flag = True
+                final_return += (value-1)
+        if odd_flag:
+            return final_return + 1
+        else:
+            return final_return 
