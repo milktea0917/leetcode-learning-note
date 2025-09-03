@@ -1,0 +1,16 @@
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        # initial
+        output = ""
+        # main
+        while columnNumber > 0:
+            # Subtract 1 from columnNumber and get current character by doing modulo of columnNumber by 26...
+            # ✓ chr() converts an integer to its corresponding character
+            # ✓ ord() gets the Unicode/ASCII value of a character (so ord('A') = 65)
+            # since we have set the base 'A', so we should  control the modular result to 0~25
+            output = chr(ord('A') + (columnNumber - 1) % 26) + output
+            # Divide columnNumber by 26...
+            columnNumber = (columnNumber - 1) // 26
+        # Return the output string.
+        return output
+                
