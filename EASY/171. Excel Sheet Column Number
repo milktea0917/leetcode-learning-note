@@ -1,0 +1,32 @@
+# clever version
+class Solution:
+    def titleToNumber(self, columnTitle: str) -> int:
+        
+        # core opinion
+        # print(ord('A')) --> 65
+
+        # initial
+        final_return = 0
+        for char in columnTitle:
+            # A-->1, B-->2, Z-->26 
+            final_return = final_return * 26 + (ord(char)-64)
+        return final_return
+
+# Brute Force Version
+class Solution:
+    def titleToNumber(self, columnTitle: str) -> int:
+        
+        # core opinion
+        # print(ord('A')) --> 65
+        # print(chr(ord('A')))
+
+        # initial
+        columnTitle_list = list(columnTitle)
+        counter = len(columnTitle_list) -1 
+        final_return = 0
+        for char in columnTitle_list:
+            # A-->1, B-->2, Z-->26 
+            temp = pow(26,counter) * ((ord(char)-64)%27)
+            final_return += temp
+            counter -= 1
+        return final_return
