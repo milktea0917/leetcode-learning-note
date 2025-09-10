@@ -1,0 +1,35 @@
+# clever way 
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        def get_next(num: int) -> int:
+            total = 0
+            while num > 0:
+                num, digit = divmod(num, 10)
+                total += digit * digit
+            return total
+
+        seen = set()
+        while n != 1 and n not in seen:
+            seen.add(n)
+            n = get_next(n)
+        return n == 1
+
+
+# Brute Force Version
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        happy_dict = dict()
+        while 1 not in happy_dict:
+            # endlessly in cycle
+            if n in happy_dict:
+                return False
+            # main
+            temp = 0
+            for char in str(n):
+                temp += (int(char)**2)
+            # write into dict
+            happy_dict[n] = temp
+            # refresh new int
+            n = temp
+        else: # if i exists in happy_dict
+            return True
