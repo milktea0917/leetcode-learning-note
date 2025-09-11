@@ -1,3 +1,22 @@
+# n = 0 --> 1
+# n = 1 --> 1
+# n = 2 --> (n = 0) + (n = 1) --> 2
+# n = 3 --> (n = 1) + (n = 2) --> 3
+# n = 4 --> (n = 2) + (n = 3) --> 5
+# n = 5 --> (n = 3) + (n = 4) --> 8
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # initital
+        solutions = [0] * (n+1)
+        solutions[0], solutions[1] = 1, 1
+        counter = 1
+        # main
+        while counter != n:
+            counter += 1
+            solutions[counter] = solutions[counter-1] + solutions[counter-2]
+        else:
+            return solutions[n]
+
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n ==0: return 0
